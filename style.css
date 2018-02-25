@@ -24,11 +24,11 @@ table {
     cursor:url(curshit.png),pointer;
 }
 tr {
-    height: 2px;
+    height: 3px;
 }
 
 td {
-    width: 2px;
+    width: 3px;
 }
 
 input[type=number] {
