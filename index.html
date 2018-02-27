@@ -22,9 +22,9 @@
 	    	<h2>Choose Grid Size</h2>
 	    	<form id="sizePicker">
 	    	    Rows:
-	    	    <input type="number" id="input_height" name="height" min="1" max="100" value="100">
+	    	    <input type="number" id="input_height" name="height" min="1" max="80" value="80">
 	    	    Columns:
-	    	    <input type="number" id="input_width" name="width" min="1" max="100" value="100">
+	    	    <input type="number" id="input_width" name="width" min="1" max="80" value="80">
 	    	    <input type="submit" value="Create Grids">
 	    	</form>
 	    	<h2>Pick A Color</h2>
@@ -35,8 +35,10 @@
 	    		<table id="pixelCanvas"></table>
 	    </main>
 	    <aside>
-	    	<div id="pencil" class="rightSide"></div>
-	    	<div id="eraser" class="rightSide"></div>
+	    	<label for="pencil">Pencil Tool</label>
+	    	<div id="pencil" class="rightSide" name="pencil"></div>
+	    	<label for="eraser">Eraser Tool</label>
+	    	<div id="eraser" class="rightSide" name="eraser"></div>
 	    	<label for="base">Base Color</label>
 	    	<input type="color" id="base" name="base">
 	    	<div id="showCode" class="rightSide"></div>
