@@ -4,6 +4,8 @@ var baseColor = document.querySelector('#base');
 var chosenColors = ['#000000'];
 document.querySelector('input[type="submit"]').addEventListener('click',init);
 
+mode();
+
 function init(event){
 	reset();
 	createGrid();
@@ -74,37 +76,29 @@ function updateColors(){
 }
 
 
-
-
-
-
-
+function mode(){
 	var tableCanvas = document.querySelector('table');
-	document.querySelector('#pencil').addEventListener('click', function(e) {
+	document.querySelector('#pencil').addEventListener('click', function(event) {
 			tableCanvas.style.cursor="url('pencil.png'), auto";
 			draw();
 	});
-	document.querySelector('#eraser').addEventListener('click', function(e) {
+	document.querySelector('#eraser').addEventListener('click', function(event) {
 			tableCanvas.style.cursor="url('eraser.png'), auto";
 			var cells = document.querySelectorAll('td');
 		for(var x = 0; x < cells.length ; x++){
 			cells[x].setAttribute("draggable",true);
 			cells[x].addEventListener('dragover', function(event) {
 				this.style.backgroundColor=baseColor.value;
-				event.preventDefault();
 		});
-		cells[x].addEventListener('dragstart', function(){
+		cells[x].addEventListener('dragstart', function(event){
 			event.dataTransfer.setData("text/plain", event.target.id);
-			 var img = new Image(); 
-			 img.src = 'eraser.png';
-			 event.dataTransfer.setDragImage(img, 0, 30);
+			 var curs = new Image(); 
+			 curs.src = 'eraser.png';
+			 event.dataTransfer.setDragImage(curs, 0, 30);
 		});
 	}
 });
-
-
-
-
+}
 
 
 
@@ -117,16 +111,13 @@ function draw(){
 			this.style.backgroundColor=thiscolor;
 			event.preventDefault();
 		});
-		cells[x].addEventListener('dragstart', dragstart_handler);
+		cells[x].addEventListener('dragstart', function(event){
+			event.dataTransfer.setData("text/plain", event.target.id);
+			 var img = new Image(); 
+			 img.src = 'pencil.png';
+			 event.dataTransfer.setDragImage(img, 0, 30);
+		});
 	}
-}
-
-// SETS DRAG IMAGE
-function dragstart_handler(event) {
-	 event.dataTransfer.setData("text/plain", event.target.id);
-	 var img = new Image(); 
-	 img.src = 'pencil.png';
-	 event.dataTransfer.setDragImage(img, 0, 30);
 }
 
 
