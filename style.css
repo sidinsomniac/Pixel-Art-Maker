@@ -3,34 +3,40 @@
 	padding: 0;
 	text-align: center;
 }
-
+body{
+	display:grid;
+	grid-template-columns: 100px 1fr 100px;
+}
 table {
     border: 1px solid black;
-}
-
-table {
     border-collapse: collapse;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform:translate(-50%,-50%);
-}
-.container{
-	border: 2px solid red;
-	width:600px;
-	height:600px;
-	position: absolute;
-    left:calc(50vw - 300px);
+    transform:translate(-50%,-35%);
     cursor:url(curshit.png),pointer;
 }
 tr {
-    height: 3px;
+    height: 6px;
 }
 
 td {
-    width: 3px;
+    width: 6px;
 }
 
 input[type=number] {
     width: 6em;
+}
+.recents{
+	width: 50px;
+	height: 50px;
+	margin:0 auto;
+	/*float:left;*/
+	/*border: 1px solid black;*/
+}
+
+.recents:hover{
+	box-sizing: border-box;
+	border: 4px solid;
+	border-color: #D8D8D8FF #D8D8D8FF black black;
 }

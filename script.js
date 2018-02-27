@@ -1,54 +1,42 @@
-// function createGrid(e) {
-// 	$('tr').remove();	
-// 	var grids = $('#pixelCanvas');
-// 	var rows = $('#input_height').val();
-// 	var columns = $('#input_width').val();	
-// 	for (i = 0; i < rows; i++) {
-// 	grids.append('<tr></tr>');
-// 	}
-// 	for (j = 0; j < columns; j++) {
-// 	$('tr').append('<td></td>');
-// 	}
-// 	cell = grids.find('td');
-	
-// 	// on click of td, flip the color of td.
-// 	cell.click(function() {
-// 		var color = $("#colorPicker").val();
-// 		$(this).css('background-color',color);
-// 	});
-	
-// 	e.preventDefault();	
-// }
+document.querySelector('input[type="submit"]').addEventListener('click',createGrid);
+var thiscolor = document.querySelector('#colorPickerMain').value;
+var newColor = document.querySelectorAll('.colorPicker');
+var chosenColors = ['#000000'];
 
 
-// $('input[type="submit"]').on('click',createGrid);
-
-	
 
 function createGrid(event){
 	reset();
 	updateGrid();
+	updateColors();
 	draw();	
+	updateRecent();
+	updateMostUsed();
 	event.preventDefault();
 }
 
-
-
+// WILL DRAW USING PENCIL TOOL
 function draw(){
-	var newColor = document.querySelector('#colorPicker');
 	var cells = document.querySelectorAll('td');
 	for(var x = 0; x < cells.length ; x++){
 		cells[x].setAttribute("draggable",true);
 		cells[x].addEventListener('dragover', function(event) {
-			this.style.backgroundColor=newColor.value;
+			this.style.backgroundColor=thiscolor;
 			event.preventDefault();
-			event.dataTransfer.effectAllowed= 'copyMove';
-            event.dataTransfer.dropEffect= 'move';
-			return false;
 		});
+		cells[x].addEventListener('dragstart', dragstart_handler);
 	}
 }
 
+// SETS DRAG IMAGE
+function dragstart_handler(event) {
+ event.dataTransfer.setData("text/plain", event.target.id);
+ var img = new Image(); 
+ img.src = 'curshit.png';
+ event.dataTransfer.setDragImage(img, 0, 30);
+}
+
+// UPDATES GRID SIZE
 function updateGrid(){	
 	var canvas = document.querySelector('#pixelCanvas');
 	var columns = document.querySelector('#input_width').value;
@@ -63,6 +51,7 @@ function updateGrid(){
 	}
 }
 
+// RESETS GRID
 function reset(){
 	var trow = document.querySelectorAll('#pixelCanvas > tr');
 	if(trow.length!==0)
@@ -71,9 +60,59 @@ function reset(){
 				document.querySelector('#pixelCanvas').deleteRow(i);
 			}
 		document.querySelector('input[type="submit"]').textContent="bitch";
-		}
-
 	}
 
+}
 
-document.querySelector('input[type="submit"]').addEventListener('click',createGrid);
+// UPDATE RECENT USED COLORS
+function updateRecent(){	
+	var recent = document.querySelectorAll('.recents');
+	var newColor = document.querySelector('#colorPickerMain');
+	newColor.addEventListener('change', function(e) {
+		chosenColors.unshift(this.value);
+		console.log(chosenColors);
+		for(var i=0;i<recent.length;i++){
+			recent[i].style.background = chosenColors[i];
+		}
+	});
+}
+
+function updateColors(){
+	for (var i = 0; i < newColor.length; i++) {
+		newColor[i].addEventListener('click',function(){		
+		thiscolor = this.style.background;
+		})
+	}
+
+	document.querySelector('#colorPickerMain').addEventListener('change',function(){		
+	thiscolor = this.value;
+	})
+}
+
+function updateMostUsed(){
+		document.querySelector('#colorPickerMain').addEventListener('change', function(){
+		document.querySelector('#mostUsed').style.background = mostUsed(chosenColors);
+	});
+}
+
+function mostUsed(arr1){
+	var mf = 1;
+	var m = 0;
+	var item;
+	for (var i=0; i<arr1.length; i++)
+	{
+	        for (var j=i; j<arr1.length; j++)
+	        {
+	                if (arr1[i] == arr1[j])
+	                 m++;
+	                if (mf<m)
+	                {
+	                  mf=m; 
+	                  item = arr1[i];
+	                }
+	        }
+	        m=0;
+	}
+	return item;
+	}
+

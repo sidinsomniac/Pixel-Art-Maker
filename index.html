@@ -7,24 +7,33 @@
 		<title>Pixel Art Maker!</title>
 	</head>
 	<body>
-	    <h1>Lab: Pixel Art Maker</h1>
-	    <h2>Choose Grid Size</h2>
-	    <form id="sizePicker">
-	        Rows:
-	        <input type="number" id="input_height" name="height" min="1" max="250" value="150">
-	        Columns:
-	        <input type="number" id="input_width" name="width" min="1" max="250" value="150">
-	        <input type="submit" value="Create Grids">
-	    </form>
-	    <h2>Pick A Color</h2>
-	    <input type="color" id="colorPicker">
-
-	    <h2>Design Canvas</h2>
-
-	    <div class="container">
-	    	<table id="pixelCanvas">
-	    			</table>
-	    </div>
+		<aside>
+			<p>Recent</p>
+			<div class="recents colorPicker"></div>
+			<div class="recents colorPicker"></div>
+			<div class="recents colorPicker"></div>
+			<div class="recents colorPicker"></div>
+			<div class="recents colorPicker"></div>
+			<p>Most Used</p>
+			<div class="recents colorPicker" id="mostUsed"></div>			
+		</aside>
+	    <main>
+	    	<h1>Lab: Pixel Art Maker</h1>
+	    	<h2>Choose Grid Size</h2>
+	    	<form id="sizePicker">
+	    	    Rows:
+	    	    <input type="number" id="input_height" name="height" min="1" max="100" value="100">
+	    	    Columns:
+	    	    <input type="number" id="input_width" name="width" min="1" max="100" value="100">
+	    	    <input type="submit" value="Create Grids">
+	    	</form>
+	    	<h2>Pick A Color</h2>
+	    	<input type="color" id="colorPickerMain">
+	    	
+	    	<h2>Design Canvas</h2>
+	    	
+	    		<table id="pixelCanvas"></table>
+	    </main>
 
 
 		<script src="script.js"></script>
