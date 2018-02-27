@@ -8,14 +8,14 @@
 	</head>
 	<body>
 		<aside>
-			<p>Recent</p>
-			<div class="recents colorPicker"></div>
-			<div class="recents colorPicker"></div>
-			<div class="recents colorPicker"></div>
-			<div class="recents colorPicker"></div>
-			<div class="recents colorPicker"></div>
-			<p>Most Used</p>
-			<div class="recents colorPicker" id="mostUsed"></div>			
+			<label for="recent">Recent</label>
+			<div class="recents colorPicker" name="recent"></div>
+			<div class="recents colorPicker" name="recent"></div>
+			<div class="recents colorPicker" name="recent"></div>
+			<div class="recents colorPicker" name="recent"></div>
+			<div class="recents colorPicker" name="recent"></div>
+			<label for="mostused">Most Used</label>
+			<div class="colorPicker" id="mostUsed" name="mostused"></div>			
 		</aside>
 	    <main>
 	    	<h1>Lab: Pixel Art Maker</h1>
@@ -34,6 +34,13 @@
 	    	
 	    		<table id="pixelCanvas"></table>
 	    </main>
+	    <aside>
+	    	<div id="pencil" class="rightSide"></div>
+	    	<div id="eraser" class="rightSide"></div>
+	    	<label for="base">Base Color</label>
+	    	<input type="color" id="base" name="base">
+	    	<div id="showCode" class="rightSide"></div>
+	    </aside>
 
 
 		<script src="script.js"></script>

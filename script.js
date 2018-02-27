@@ -1,19 +1,79 @@
-document.querySelector('input[type="submit"]').addEventListener('click',createGrid);
 var thiscolor = document.querySelector('#colorPickerMain').value;
 var newColor = document.querySelectorAll('.colorPicker');
 var chosenColors = ['#000000'];
+document.querySelector('input[type="submit"]').addEventListener('click',init);
 
 
 
-function createGrid(event){
+function init(event){
 	reset();
-	updateGrid();
+	createGrid();
+	updateBase();
 	updateColors();
 	draw();	
 	updateRecent();
 	updateMostUsed();
 	event.preventDefault();
 }
+
+// RESETS GRID
+function reset(){
+	var trow = document.querySelectorAll('#pixelCanvas > tr');
+	if(trow.length!==0)
+		{
+			for(i=0;i<trow.length;i++){
+				document.querySelector('#pixelCanvas').deleteRow(i);
+			}
+		document.querySelector('input[type="submit"]').textContent="bitch";
+	}
+
+}
+
+// UPDATES GRID SIZE
+function createGrid(){	
+	var canvas = document.querySelector('#pixelCanvas');
+	var columns = document.querySelector('#input_width').value;
+	var rows = document.querySelector('#input_height').value;
+	for(var i = 0; i < rows ; i++){
+	var row = document.createElement("tr");
+		canvas.appendChild(row);		
+		for(var j = 0; j < columns ; j++){
+			var cell = document.createElement("td");
+			row.appendChild(cell);
+		}
+	}
+}
+
+// UPDATES THE BASE COLOR
+function updateBase(){
+	var baseColor = document.querySelector('#base');
+	var cells = document.querySelectorAll('td');
+	baseColor.addEventListener('change', function(e) {
+		console.log(baseColor.value);
+		for (var i = 0; i < cells.length; i++) {
+			cells[i].style.background = baseColor.value;
+		}
+	});
+
+}
+
+
+// UPDATE ALL COLORS OF LEFT SIDE
+function updateColors(){
+	for (var i = 0; i < newColor.length; i++) {
+		newColor[i].addEventListener('click',function(){		
+		thiscolor = colorToHex(this.style.backgroundColor);
+		if(thiscolor!="")
+		chosenColors.unshift(thiscolor);
+		document.querySelector('#mostUsed').style.background = mostUsed(chosenColors);
+		console.log(chosenColors);
+		})
+	}
+	document.querySelector('#colorPickerMain').addEventListener('change',function(){		
+	thiscolor = this.value;
+	})
+}
+
 
 // WILL DRAW USING PENCIL TOOL
 function draw(){
@@ -30,45 +90,19 @@ function draw(){
 
 // SETS DRAG IMAGE
 function dragstart_handler(event) {
- event.dataTransfer.setData("text/plain", event.target.id);
- var img = new Image(); 
- img.src = 'curshit.png';
- event.dataTransfer.setDragImage(img, 0, 30);
+	 event.dataTransfer.setData("text/plain", event.target.id);
+	 var img = new Image(); 
+	 img.src = 'curshit.png';
+	 event.dataTransfer.setDragImage(img, 0, 30);
 }
 
-// UPDATES GRID SIZE
-function updateGrid(){	
-	var canvas = document.querySelector('#pixelCanvas');
-	var columns = document.querySelector('#input_width').value;
-	var rows = document.querySelector('#input_height').value;
-	for(var i = 0; i < rows ; i++){
-	var row = document.createElement("tr");
-		canvas.appendChild(row);		
-		for(var j = 0; j < columns ; j++){
-			var cell = document.createElement("td");
-			row.appendChild(cell);
-		}
-	}
-}
-
-// RESETS GRID
-function reset(){
-	var trow = document.querySelectorAll('#pixelCanvas > tr');
-	if(trow.length!==0)
-		{
-			for(i=0;i<trow.length;i++){
-				document.querySelector('#pixelCanvas').deleteRow(i);
-			}
-		document.querySelector('input[type="submit"]').textContent="bitch";
-	}
-
-}
 
 // UPDATE RECENT USED COLORS
 function updateRecent(){	
 	var recent = document.querySelectorAll('.recents');
 	var newColor = document.querySelector('#colorPickerMain');
 	newColor.addEventListener('change', function(e) {
+		if(thiscolor!="")
 		chosenColors.unshift(this.value);
 		console.log(chosenColors);
 		for(var i=0;i<recent.length;i++){
@@ -77,24 +111,14 @@ function updateRecent(){
 	});
 }
 
-function updateColors(){
-	for (var i = 0; i < newColor.length; i++) {
-		newColor[i].addEventListener('click',function(){		
-		thiscolor = this.style.background;
-		})
-	}
-
-	document.querySelector('#colorPickerMain').addEventListener('change',function(){		
-	thiscolor = this.value;
-	})
-}
-
+// UPDATE MOST USED COLOR
 function updateMostUsed(){
 		document.querySelector('#colorPickerMain').addEventListener('change', function(){
 		document.querySelector('#mostUsed').style.background = mostUsed(chosenColors);
 	});
 }
 
+// FINDS MOST FRQUENT ELEMENT IN CHOSENCOLORS
 function mostUsed(arr1){
 	var mf = 1;
 	var m = 0;
@@ -115,4 +139,24 @@ function mostUsed(arr1){
 	}
 	return item;
 	}
+
+
+// CHANGE TEXT CONTENT ON CLICK
+document.querySelector('input[type="submit"]').addEventListener('click',changeText);
+function changeText(){
+	if(this.value==="Create Grids")
+		this.value="Clear Grids";
+	else if(this.value==="Reset Grids")
+		this.value="Clear Grids";
+}
+
+
+// CONVERTS RGB VALUES TO HEX
+function colorToHex(rgb) {
+    rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+ return (rgb && rgb.length === 4) ? "#" +
+  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+};
 
