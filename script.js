@@ -3,6 +3,7 @@ var newColor = document.querySelectorAll('.colorPicker');
 var baseColor = document.querySelector('#base');
 var chosenColors = ['#000000'];
 document.querySelector('input[type="submit"]').addEventListener('click',init);
+document.querySelector('#pixelCanvas').addEventListener('mouseover', mousePos);
 
 tools();
 
@@ -137,7 +138,7 @@ function draw(){
 			event.dataTransfer.setData("text/plain", event.target.id);
 			 var img = new Image(); 
 			 img.src = 'pencil.png';
-			 event.dataTransfer.setDragImage(img, 0, 30);
+			 event.dataTransfer.setDragImage(img, 0, 0);
 		});
 	}
 }
@@ -211,4 +212,11 @@ function cellLoop(a,b,c){
 		for(var x = 0; x < cells.length ; x++){
 			cells[x].style.filter = a + b + c;
 			}
+}
+
+function mousePos(event){
+	var x = event.pageX - this.offsetLeft + 2*document.querySelector('.container').offsetLeft - 24;
+    var y = event.pageY - this.offsetTop + 2*document.querySelector('.container').offsetTop - 90;
+    document.querySelector('#horizontal').textContent = ` ${x}px `;
+    document.querySelector('#vertical').textContent = ` ${y}px`;
 }

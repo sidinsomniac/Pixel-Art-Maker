@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<link rel="stylesheet" href="style.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<title>Pixel Art Maker</title>
 	</head>
 	<body>
@@ -36,12 +37,21 @@
 	    	<main>
 	    		<div class="container">
 	    			<div class="titleBar">
+	    				<img src="icon.png" alt="icon.png" id="icon">
 	    				<p id="titleHead">Design Canvas</p>
-	    				<div class="mini"></div>
-	    				<div class="maxi"></div>
-	    				<div class="exit"></div>
+	    				<div id="exit"></div>
+	    				<div id="maxi"></div>
+	    				<div id="mini"></div>
+	    			</div>
+	    			<div class="menubar">
+	    				<div><u>F</u>ile</div>
+	    				<div><u>E</u>dit</div>
+	    				<div><u>V</u>iew</div>
+	    				<div><u>T</u>ools</div>
+	    				<div><u>H</u>elp</div>
 	    			</div>
 	    			<table id="pixelCanvas"></table>
+	    			<div class="footer">&#8596;<span id="horizontal"></span>&#8597;<span id="vertical"></span></div>
 	    		</div>
 	    	</main>
 
