@@ -4,7 +4,7 @@ var baseColor = document.querySelector('#base');
 var chosenColors = ['#000000'];
 document.querySelector('input[type="submit"]').addEventListener('click',init);
 
-mode();
+tools();
 
 function init(event){
 	reset();
@@ -20,6 +20,7 @@ function init(event){
 // RESETS GRID
 function reset(){
 	var trow = document.querySelectorAll('#pixelCanvas > tr');
+	document.querySelector('#colorPickerMain').value = '#000000';
 	if(trow.length!==0)
 		{
 			for(i=0;i<trow.length;i++){
@@ -76,14 +77,11 @@ function updateColors(){
 }
 
 
-function mode(){
-	var tableCanvas = document.querySelector('table');
-	document.querySelector('#pencil').addEventListener('click', function(event) {
-			tableCanvas.style.cursor="url('pencil.png'), auto";
-			draw();
-	});
+// SETS THE MODE
+function tools(){
+	document.querySelector('#pencil').addEventListener('click', draw);
 	document.querySelector('#eraser').addEventListener('click', function(event) {
-			tableCanvas.style.cursor="url('eraser.png'), auto";
+			document.querySelector('table').style.cursor="url('eraser.png'), auto";
 			var cells = document.querySelectorAll('td');
 		for(var x = 0; x < cells.length ; x++){
 			cells[x].setAttribute("draggable",true);
@@ -98,13 +96,37 @@ function mode(){
 		});
 	}
 });
+
+	
+// **********************************************
+// CORRECT HERE
+// **********************************************
+
+
+	document.querySelector('#hueChange').addEventListener('change', function(event) {
+		var cells = document.querySelectorAll('td');
+		for(var x = 0; x < cells.length ; x++){
+			cells[x].style.filter = "hue-rotate("+this.value+"deg)";
+			}
+	});
+	
+	document.querySelector('#grayScale').addEventListener('change', function(event) {
+		var cells = document.querySelectorAll('td');
+		for(var x = 0; x < cells.length ; x++){
+			cells[x].style.filter = "grayscale("+this.value+"%)";
+			}
+	});
 }
 
+// **********************************************
+// CORRECT HERE
+// **********************************************
 
 
 // WILL DRAW USING PENCIL TOOL
 function draw(){
 	var cells = document.querySelectorAll('td');
+	document.querySelector('table').style.cursor="url('pencil.png'), auto";
 	for(var x = 0; x < cells.length ; x++){
 		cells[x].setAttribute("draggable",true);
 		cells[x].addEventListener('dragover', function(event) {

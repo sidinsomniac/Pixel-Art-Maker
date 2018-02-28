@@ -40,7 +40,7 @@ input[type=number] {
 .colorPicker:hover{
 	box-sizing: border-box;
 	border: 8px solid;
-	border-color: #D8D8D8FF #D8D8D8FF #383838FF #383838FF;
+	border-color: white #D8D8D8FF #383838FF #383838FF;
 }
 
 
@@ -49,19 +49,22 @@ input[type=number] {
 	height: 50px;
 	margin:0 auto;
 	border: 8px solid;
-	border-color: #707070 #707070 #424242 #424242;
+	background: #000;
+	border-color: #606060 gray #424242 #424242;
 }
 
 .rightSide:hover{
 	box-sizing: content-box;
 	border: 8px solid;
-	border-color: #D8D8D8FF #D8D8D8FF #383838FF #383838FF;
+	border-color: white #D8D8D8FF #2D2D2D #2D2D2D;
 }
 
 #pencil{
 	background: url(pencil.png);
 	background-repeat: no-repeat;
 	background-position: center;
+	background-color: #BBB;
+	border-color: black;
 }
 #eraser{
 	background: url(eraser.png);
@@ -69,7 +72,33 @@ input[type=number] {
 	background-position: center;
 }
 
-.colorPicker,#pencil,#eraser{
+#hueChange,#grayScale{
+	width: 80px;
+	height: 4px;
+	margin:10px auto;
+	display: block;
+	-webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+#hueChange::-webkit-slider-thumb , #grayScale::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #BBB;
+    cursor: pointer;
+    box-sizing: content-box;
+	border: 2px solid;
+	border-color: white #D8D8D8FF #2D2D2D #2D2D2D;
+}
+
+.colorPicker,#eraser{
 	background-color: #BBB;
 }
 aside{
