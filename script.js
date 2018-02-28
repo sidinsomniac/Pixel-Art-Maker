@@ -6,6 +6,9 @@ document.querySelector('input[type="submit"]').addEventListener('click',init);
 
 tools();
 
+
+
+
 function init(event){
 	reset();
 	createGrid();
@@ -59,7 +62,6 @@ function updateBase(){
 
 }
 
-
 // UPDATE ALL COLORS OF LEFT SIDE
 function updateColors(){
 	for (var i = 0; i < newColor.length; i++) {
@@ -104,17 +106,15 @@ function tools(){
 
 
 	document.querySelector('#hueChange').addEventListener('change', function(event) {
-		var cells = document.querySelectorAll('td');
-		for(var x = 0; x < cells.length ; x++){
-			cells[x].style.filter = "hue-rotate("+this.value+"deg)";
-			}
+		cellLoop("hue-rotate(" , this.value , "deg)");
 	});
-	
+
 	document.querySelector('#grayScale').addEventListener('change', function(event) {
-		var cells = document.querySelectorAll('td');
-		for(var x = 0; x < cells.length ; x++){
-			cells[x].style.filter = "grayscale("+this.value+"%)";
-			}
+		cellLoop("grayscale(",this.value,"%)");
+	});
+
+	document.querySelector('#inverting').addEventListener('change', function(event) {
+		cellLoop("invert(",this.value/10,")");
 	});
 }
 
@@ -196,7 +196,6 @@ function changeText(){
 		this.value="Clear Grids";
 }
 
-
 // CONVERTS RGB VALUES TO HEX
 function colorToHex(rgb) {
     rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
@@ -206,3 +205,10 @@ function colorToHex(rgb) {
   ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
 };
 
+// LOOPING THROUGH TD TO CHANGE FILTER STYLE
+function cellLoop(a,b,c){
+	var cells = document.querySelectorAll('td');
+		for(var x = 0; x < cells.length ; x++){
+			cells[x].style.filter = a + b + c;
+			}
+}
