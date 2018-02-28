@@ -12,6 +12,7 @@ tools();
 function init(event){
 	reset();
 	createGrid();
+	colorGrid();
 	updateBase();
 	updateColors();
 	draw();	
@@ -29,7 +30,6 @@ function reset(){
 			for(i=0;i<trow.length;i++){
 				document.querySelector('#pixelCanvas').deleteRow(i);
 			}
-		document.querySelector('input[type="submit"]').textContent="bitch";
 	}
 
 }
@@ -47,7 +47,15 @@ function createGrid(){
 			row.appendChild(cell);
 		}
 	}
-baseColor.value = '#ffffff';
+	baseColor.value = '#ffffff';
+}
+
+// UPDATES BG-COLOR OF GRID
+function colorGrid(){
+	var cells = document.querySelectorAll('td');
+	for (var i = 0; i < cells.length; i++) {
+		cells[i].style.background = "#ffffff";
+	}
 }
 
 // UPDATES THE BASE COLOR
@@ -81,7 +89,9 @@ function updateColors(){
 
 // SETS THE MODE
 function tools(){
+	// Pencil Tool
 	document.querySelector('#pencil').addEventListener('click', draw);
+	// Eraser Tool
 	document.querySelector('#eraser').addEventListener('click', function(event) {
 			document.querySelector('table').style.cursor="url('eraser.png'), auto";
 			var cells = document.querySelectorAll('td');
@@ -95,32 +105,22 @@ function tools(){
 			 var curs = new Image(); 
 			 curs.src = 'eraser.png';
 			 event.dataTransfer.setDragImage(curs, 0, 30);
-		});
-	}
-});
-
-	
-// **********************************************
-// CORRECT HERE
-// **********************************************
-
-
+			});
+		}
+	});
+	// Hue Tool
 	document.querySelector('#hueChange').addEventListener('change', function(event) {
 		cellLoop("hue-rotate(" , this.value , "deg)");
 	});
-
+	// B&W Tool
 	document.querySelector('#grayScale').addEventListener('change', function(event) {
 		cellLoop("grayscale(",this.value,"%)");
 	});
-
+	// Invert Tool
 	document.querySelector('#inverting').addEventListener('change', function(event) {
 		cellLoop("invert(",this.value/10,")");
 	});
 }
-
-// **********************************************
-// CORRECT HERE
-// **********************************************
 
 
 // WILL DRAW USING PENCIL TOOL
