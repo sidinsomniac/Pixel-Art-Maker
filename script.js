@@ -7,16 +7,14 @@ document.querySelector('#pixelCanvas').addEventListener('mouseover', mousePos);
 
 tools();
 
-
-
-
 function init(event){
 	reset();
 	createGrid();
 	colorGrid();
 	updateBase();
 	updateColors();
-	draw();	
+	draw();
+	selectDrawTool();
 	updateRecent();
 	updateMostUsed();
 	event.preventDefault();
@@ -49,6 +47,7 @@ function createGrid(){
 		}
 	}
 	baseColor.value = '#ffffff';
+	document.querySelector('#pencil').classList.add('selected');
 }
 
 // UPDATES BG-COLOR OF GRID
@@ -105,21 +104,21 @@ function tools(){
 			event.dataTransfer.setData("text/plain", event.target.id);
 			 var curs = new Image(); 
 			 curs.src = 'eraser.png';
-			 event.dataTransfer.setDragImage(curs, 0, 30);
+			 event.dataTransfer.setDragImage(curs, 0, 0);
 			});
 		}
 	});
 	// Hue Tool
 	document.querySelector('#hueChange').addEventListener('change', function(event) {
-		cellLoop("hue-rotate(" , this.value , "deg)");
+		cellLoop("hue-rotate(" , this.value , "deg)",'#grayScale','#inverting');
 	});
 	// B&W Tool
 	document.querySelector('#grayScale').addEventListener('change', function(event) {
-		cellLoop("grayscale(",this.value,"%)");
+		cellLoop("grayscale(",this.value,"%)",'#hueChange','#inverting');		
 	});
 	// Invert Tool
 	document.querySelector('#inverting').addEventListener('change', function(event) {
-		cellLoop("invert(",this.value/10,")");
+		cellLoop("invert(",this.value/10,")",'#grayScale','#hueChange');
 	});
 }
 
@@ -191,10 +190,10 @@ function mostUsed(arr1){
 // CHANGE TEXT CONTENT ON CLICK
 document.querySelector('input[type="submit"]').addEventListener('click',changeText);
 function changeText(){
-	if(this.value==="Create Grids")
-		this.value="Clear Grids";
-	else if(this.value==="Reset Grids")
-		this.value="Clear Grids";
+	if(this.value==="New Canvas")
+		this.value="Remove Canvas";
+	else if(this.value==="Remove Canvas")
+		this.value="New Canvas";
 }
 
 // CONVERTS RGB VALUES TO HEX
@@ -207,16 +206,40 @@ function colorToHex(rgb) {
 };
 
 // LOOPING THROUGH TD TO CHANGE FILTER STYLE
-function cellLoop(a,b,c){
+function cellLoop(a,b,c,e,f){
 	var cells = document.querySelectorAll('td');
 		for(var x = 0; x < cells.length ; x++){
 			cells[x].style.filter = a + b + c;
-			}
+			}		
+	document.querySelector(e).value='0';
+	document.querySelector(f).value='0';
 }
 
+
+ // LOCATE MOUSE POSITION
 function mousePos(event){
-	var x = event.pageX - this.offsetLeft + 2*document.querySelector('.container').offsetLeft - 24;
-    var y = event.pageY - this.offsetTop + 2*document.querySelector('.container').offsetTop - 90;
+	var rect = document.querySelector("#pixelCanvas > tr:nth-child(1) > td:nth-child(1)").getBoundingClientRect();
+	var x = event.pageX - Math.floor(rect.left);
+    var y = event.pageY - Math.floor(rect.top);
     document.querySelector('#horizontal').textContent = ` ${x}px `;
     document.querySelector('#vertical').textContent = ` ${y}px`;
+}
+
+
+function selectDrawTool(){
+	var pencil = document.querySelector('#pencil');
+	var eraser = document.querySelector('#eraser');
+	selectors(pencil,eraser);
+	}
+
+
+function selectors(a,b){
+		a.addEventListener('click', function(e) {
+			b.classList.remove('selected');
+			this.classList.add('selected');
+		});
+		b.addEventListener('click', function(e) {
+			a.classList.remove('selected');
+			this.classList.add('selected');
+		});
 }

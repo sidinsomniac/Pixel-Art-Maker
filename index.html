@@ -10,8 +10,10 @@
 	<body>
 		<aside>
 	    	<h2>Colors</h2>
-			<label for="colorPicker">Pick Color</label>
 	    	<input type="color" id="colorPickerMain" name="colorPicker">
+			<label for="colorPicker">Pencil Color</label>
+	    	<input type="color" id="base" name="base">
+	    	<label for="base">Base Color</label>
 			<label for="recent">Recent</label>
 			<div class="recents colorPicker" name="recent"></div>
 			<div class="recents colorPicker" name="recent"></div>
@@ -27,10 +29,10 @@
 	    	<h2>Choose Grid Size</h2>
 	    	<form id="sizePicker">
 	    	    Rows:
-	    	    <input type="number" id="input_height" name="height" min="1" max="80" value="80">
+	    	    <input type="number" id="input_height" name="height" min="1" max="60" value="60">
 	    	    Columns:
 	    	    <input type="number" id="input_width" name="width" min="1" max="80" value="80">
-	    	    <input type="submit" value="Create Grids">
+	    	    <input type="submit" value="New Canvas">
 	    	</form>
 	    </header>
 	    	
@@ -58,18 +60,16 @@
 
 	    <aside>
 	    	<h2>Tools</h2>
-	    	<label for="pencil">Pencil Tool</label>
 	    	<div id="pencil" class="rightSide" name="pencil"></div>
-	    	<label for="eraser">Eraser Tool</label>
+	    	<label for="pencil">Pencil Tool</label>
 	    	<div id="eraser" class="rightSide" name="eraser"></div>
-	    	<label for="hueChange">Change Color Group</label>
+	    	<label for="eraser">Eraser Tool</label>
 	    	<input type="range" id="hueChange" name="hueChange" min="0" max="360" value="0">
-	    	<label for="grayScale">Desaturate Tool</label>
+	    	<label for="hueChange">Change Color Tool</label>
 	    	<input type="range" id="grayScale" name="grayScale" min="0" max="100" value="0">
-	    	<label for="inverting">Invert Tool</label>
+	    	<label for="grayScale">Desaturate Tool</label>
 	    	<input type="range" id="inverting" name="inverting" min="0" max="10" value="0">
-	    	<label for="base">Base Color</label>
-	    	<input type="color" id="base" name="base">
+	    	<label for="inverting">Invert Tool</label>
 	    </aside>
 
 
