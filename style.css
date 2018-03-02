@@ -1,7 +1,3 @@
-@font-face{
-	font-family: arcadeClassic;
-	src: url('font.ttf');
-}
 *{
 	margin: 0;
 	padding: 0;
@@ -20,9 +16,11 @@ body{
 						'b c d';
 	cursor: default;
 }
+#pixart{
+	font-family: 'VT323', monospace;
+}
 h1{
-	font-family: arcadeClassic;
-	font-size: 3em;
+	font-size: 2.5em;
 }
 table{
     border: 1px solid black;

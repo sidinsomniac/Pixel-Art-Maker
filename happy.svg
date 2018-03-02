@@ -4,7 +4,7 @@
 	 <style>
 	 	#XMLID_2_{
 	 	transform-origin: 345px 280px;
-	 	animation: wave cubic-bezier(1, 0.01, 1, -0.18) 2s infinite;
+	 	animation: wave cubic-bezier(1, 0.01, 1, -0.18) 1.5s infinite;
 	 	}
 	 	@keyframes wave{
 			0% {
