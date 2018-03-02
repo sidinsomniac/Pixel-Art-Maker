@@ -10,4 +10,4 @@
 > **Find the exact position of your pencil tool** <br/>
 > **Additional filters which change color groups, desaturate, or invert your drawing colors.** <br/>
 
-![Alt text](/Pixel-Art-Maker/snoopy.jpg?raw=true "Screenshot")
+![Screenshot](snoopy.jpg?raw=true "Screenshot")
