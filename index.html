@@ -8,12 +8,33 @@
 		<title>Pixel Art Maker</title>
 	</head>
 	<body>
+		<section>
+			<div class="wrapper">
+				<div class="titleBar">
+					<p id="titleHeading">Welcome</p>
+					<div id="exit" class="openMain exitOpenMain"></div>
+				</div>
+				<div id="dialogBox">
+					<div id="dialogue">
+						<p>Welcome to the 90s, the craziest time on the history of human race!</p>
+						<p>If you're a 90s kid, welcome back!</p>
+						<p>If not, you're welcome all the same!</p>
+						<p>The only rule that applies is to, well,</p>
+						<p>LET YOUR IMAGINATION FLOW!</p>
+						<p>Enjoy the Pixel Art Maker!</p>
+					</div>
+					<object data="happy.svg" type="image/svg+xml"></object>
+					<button id="okay" style="font-family: sans-serif" class="openMain">OK</button>
+				</div>
+			</div>
+		</section>
 		<aside>
 	    	<h2>Colors</h2>
 	    	<input type="color" id="colorPickerMain" name="colorPicker">
 			<label for="colorPicker">Pencil Color</label>
 	    	<input type="color" id="base" name="base">
 	    	<label for="base">Base Color</label>
+	    	<hr>
 			<label for="recent">Recent</label>
 			<div class="recents colorPicker" name="recent"></div>
 			<div class="recents colorPicker" name="recent"></div>
@@ -21,12 +42,14 @@
 			<div class="recents colorPicker" name="recent"></div>
 			<div class="recents colorPicker" name="recent"></div>
 			<label for="mostused">Most Used</label>
-			<div class="colorPicker" id="mostUsed" name="mostused"></div>			
+			<div class="colorPicker" id="mostUsed" name="mostused"></div>
+			<hr>		
 		</aside>
 
 	    <header>
 	    	<h1>Lab: Pixel Art Maker</h1>
-	    	<h2>Choose Grid Size</h2>
+	    	<hr>
+	    	<h4>Choose Grid Size</h4>
 	    	<form id="sizePicker">
 	    	    Rows:
 	    	    <input type="number" id="input_height" name="height" min="1" max="60" value="60">
@@ -53,7 +76,11 @@
 	    				<div><u>H</u>elp</div>
 	    			</div>
 	    			<table id="pixelCanvas"></table>
-	    			<div class="footer">&#8596;<span id="horizontal"></span>&#8597;<span id="vertical"></span></div>
+	    			<div class="footer">
+	    				<span id="rowColumns"><span id="rowDisp"></span>R &#10006; <span id="colDisp"></span>C</span>
+	    				<span id="pointerPos">&#8596;<span id="horizontal"></span>&#8597;<span id="vertical"></span></span>
+	    				<span id="HW">Dimension: <span id="wtDisp"></span>px &#10006; <span id="htDisp"></span>px</span>
+	    			</div>
 	    		</div>
 	    	</main>
 
@@ -64,12 +91,14 @@
 	    	<label for="pencil">Pencil Tool</label>
 	    	<div id="eraser" class="rightSide" name="eraser"></div>
 	    	<label for="eraser">Eraser Tool</label>
-	    	<input type="range" id="hueChange" name="hueChange" min="0" max="360" value="0">
+	    	<hr>
 	    	<label for="hueChange">Change Color Tool</label>
-	    	<input type="range" id="grayScale" name="grayScale" min="0" max="100" value="0">
+	    	<input type="range" id="hueChange" name="hueChange" min="0" max="360" value="0">
 	    	<label for="grayScale">Desaturate Tool</label>
-	    	<input type="range" id="inverting" name="inverting" min="0" max="10" value="0">
+	    	<input type="range" id="grayScale" name="grayScale" min="0" max="100" value="0">
 	    	<label for="inverting">Invert Tool</label>
+	    	<input type="range" id="inverting" name="inverting" min="0" max="10" value="0">
+	    	<hr>
 	    </aside>
 
 

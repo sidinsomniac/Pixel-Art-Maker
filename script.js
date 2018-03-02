@@ -2,14 +2,18 @@ var thiscolor = document.querySelector('#colorPickerMain').value;
 var newColor = document.querySelectorAll('.colorPicker');
 var baseColor = document.querySelector('#base');
 var chosenColors = ['#000000'];
+var canvas = document.querySelector('#pixelCanvas');
 document.querySelector('input[type="submit"]').addEventListener('click',init);
 document.querySelector('#pixelCanvas').addEventListener('mouseover', mousePos);
 
 tools();
+setTimeout(exitDialog,800);
+
 
 function init(event){
 	reset();
 	createGrid();
+	updateFooter();
 	colorGrid();
 	updateBase();
 	updateColors();
@@ -35,7 +39,6 @@ function reset(){
 
 // UPDATES GRID SIZE
 function createGrid(){	
-	var canvas = document.querySelector('#pixelCanvas');
 	var columns = document.querySelector('#input_width').value;
 	var rows = document.querySelector('#input_height').value;
 	for(var i = 0; i < rows ; i++){
@@ -93,8 +96,8 @@ function tools(){
 	document.querySelector('#pencil').addEventListener('click', draw);
 	// Eraser Tool
 	document.querySelector('#eraser').addEventListener('click', function(event) {
-			document.querySelector('table').style.cursor="url('eraser.png'), auto";
-			var cells = document.querySelectorAll('td');
+		document.querySelector('table').style.cursor="url('eraser.png'), auto";
+		var cells = document.querySelectorAll('td');
 		for(var x = 0; x < cells.length ; x++){
 			cells[x].setAttribute("draggable",true);
 			cells[x].addEventListener('dragover', function(event) {
@@ -226,13 +229,28 @@ function mousePos(event){
 }
 
 
+
+function updateFooter(){
+	var tableR = canvas.getBoundingClientRect();
+	var topR = Math.ceil(tableR.top);
+	var rightR = Math.ceil(tableR.right);
+	var bottomR = Math.ceil(tableR.bottom);
+	var leftR = Math.ceil(tableR.left);
+	var columns = document.querySelector('#input_width').value;
+	var rows = document.querySelector('#input_height').value;
+    document.querySelector('#rowDisp').textContent = rows;
+    document.querySelector('#colDisp').textContent = columns;
+    document.querySelector('#htDisp').textContent = bottomR-topR - 1;
+    document.querySelector('#wtDisp').textContent = rightR-leftR - 1;
+}
+
+
+// SHOW CURRENT DRAWING TOOL SELECTION
 function selectDrawTool(){
 	var pencil = document.querySelector('#pencil');
 	var eraser = document.querySelector('#eraser');
 	selectors(pencil,eraser);
 	}
-
-
 function selectors(a,b){
 		a.addEventListener('click', function(e) {
 			b.classList.remove('selected');
@@ -242,4 +260,16 @@ function selectors(a,b){
 			a.classList.remove('selected');
 			this.classList.add('selected');
 		});
+}
+
+
+// TO EXIT INITIAL DIALOG BOX
+function exitDialog(){
+	document.querySelector('section').style.display = "block";
+	var exiting = document.querySelectorAll('.openMain');
+for (var i = 0; i < exiting.length; i++) {
+	exiting[i].addEventListener('click',function(){
+		document.querySelector('section').style.display='none';
+	})
+}
 }
